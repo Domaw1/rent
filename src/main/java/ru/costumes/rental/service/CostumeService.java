@@ -11,4 +11,5 @@ public interface CostumeService {
     List<CostumesDTO> getCostumes();
 
     Costume findById(int id);
+    Costume create(Costume costume, List<Integer> categoryIds);
 }

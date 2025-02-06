@@ -6,6 +6,8 @@ import ru.costumes.rental.model.User;
 import ru.costumes.rental.repository.UserRepository;
 import ru.costumes.rental.service.UserService;
 
+import java.time.LocalDateTime;
+
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -21,6 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerMe(User user) {
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
         return repository.save(user);
     }
 
