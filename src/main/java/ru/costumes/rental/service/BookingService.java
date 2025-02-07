@@ -11,4 +11,5 @@ public interface BookingService {
     List<BookingDTO> getBookings();
     List<BookingDTO> getBookingByCostumeId(int id);
     List<BookingDTO> getBookingByUserId(int id);
+    Booking addNewBooking(Booking booking);
 }

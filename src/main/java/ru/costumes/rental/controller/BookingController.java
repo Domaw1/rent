@@ -1,14 +1,12 @@
 package ru.costumes.rental.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.costumes.rental.DTO.BookingDTO;
 import ru.costumes.rental.model.Booking;
 import ru.costumes.rental.service.BookingService;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @RestController
@@ -30,5 +28,10 @@ public class BookingController {
     @GetMapping("/user/{userId}")
     public List<BookingDTO> getBookingByUserId(@PathVariable int userId) {
         return bookingService.getBookingByUserId(userId);
+    }
+
+    @PostMapping
+    public Booking createBooking(@RequestBody Booking booking) {
+        return bookingService.addNewBooking(booking);
     }
 }

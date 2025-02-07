@@ -1,5 +1,6 @@
 package ru.costumes.rental.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,6 +21,14 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "costume_id", nullable = false)
     private Costume costume;
+
+    @Transient
+    @JsonProperty("costumeId")
+    private Integer costumeId;
+
+    @Transient
+    @JsonProperty("userId")
+    private Integer userId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

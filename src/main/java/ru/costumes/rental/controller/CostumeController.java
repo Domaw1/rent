@@ -29,7 +29,7 @@ public class CostumeController {
             costume.setName(costumeRequest.getName());
             costume.setPricePerDay(costumeRequest.getPricePerDay());
 
-            Costume createdCostume = costumeService.create(costume, costumeRequest.getCategoryIds());
+            Costume createdCostume = costumeService.create(costume, costumeRequest.getCategoryIds(), costumeRequest.getPhotos());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(createdCostume);
         } catch (Exception e) {
@@ -37,10 +37,39 @@ public class CostumeController {
         }
     }
 
+    @PutMapping
+    private ResponseEntity updateCostume(@RequestBody CostumeUpdateRequest costumeRequest) {
+        try {
+            Costume costume = costumeService.findById(costumeRequest.getCostumeId());
+            costume.setName(costumeRequest.getName());
+            costume.setPricePerDay(costumeRequest.getPricePerDay());
+            CostumesDTO createdCostume = costumeService.update(costume, costumeRequest.getCategoryIds(), costumeRequest.getPhotos());
+
+            return ResponseEntity.status(HttpStatus.OK).body(createdCostume);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{costumeId}")
+    private void removeCostume(@PathVariable int costumeId) {
+        costumeService.deleteCostume(costumeId);
+    }
+
     @Data
     public static class CostumeRequest {
         private String name;
         private Double pricePerDay;
         private List<Integer> categoryIds;
+        private List<String> photos;
+    }
+
+    @Data
+    public static class CostumeUpdateRequest {
+        private Integer costumeId;
+        private String name;
+        private Double pricePerDay;
+        private List<Integer> categoryIds;
+        private List<String> photos;
     }
 }

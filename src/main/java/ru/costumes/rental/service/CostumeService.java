@@ -11,5 +11,8 @@ public interface CostumeService {
     List<CostumesDTO> getCostumes();
 
     Costume findById(int id);
-    Costume create(Costume costume, List<Integer> categoryIds);
+    Costume create(Costume costume, List<Integer> categoryIds, List<String> photos);
+    CostumesDTO update(Costume costumeToUpdate , List<Integer> categoryIds, List<String> photos);
+
+    void deleteCostume(int costumeId);
 }

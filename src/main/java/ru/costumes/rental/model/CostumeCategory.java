@@ -11,7 +11,7 @@ public class CostumeCategory {
 
     @Id
     @ManyToOne
-    @JsonIgnore
+//    @JsonIgnore
     @JoinColumn(name = "costume_id", nullable = false)
     private Costume costume;
 

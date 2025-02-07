@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "booking_status")
+@IdClass(BookingStatusId.class)
 public class BookingStatus {
-
     @Id
     @ManyToOne
     @JoinColumn(name = "booking_id", nullable = false)
