@@ -13,6 +13,7 @@ import ru.costumes.rental.service.CostumeService;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,14 +78,13 @@ public class CostumeServiceImpl implements CostumeService {
 
         if (categoryIds != null) {
             List<Category> categories = categoryRepository.findAllById(categoryIds);
-            List<CostumeCategory> costumeCategories = categories.stream()
-                    .map(category -> {
-                        CostumeCategory costumeCategory = new CostumeCategory();
-                        costumeCategory.setCostume(costumeToUpdate);
-                        costumeCategory.setCategory(category);
-                        return costumeCategory;
-                    })
-                    .collect(Collectors.toList());
+            List<CostumeCategory> costumeCategories = new ArrayList<>();
+            for (Category category1 : categories) {
+                CostumeCategory costumeCategory = new CostumeCategory();
+                costumeCategory.setCostume(costumeToUpdate);
+                costumeCategory.setCategory(category1);
+                costumeCategories.add(costumeCategory);
+            }
             costumeToUpdate.getCostumeCategories().addAll(costumeCategories);
         }
 
@@ -98,7 +98,7 @@ public class CostumeServiceImpl implements CostumeService {
                         newPhoto.setUpdatedAt(LocalDateTime.now());
                         return newPhoto;
                     })
-                    .collect(Collectors.toList());
+                    .toList();
             costumeToUpdate.getCostumePhotos().addAll(photoList);
         }
 
