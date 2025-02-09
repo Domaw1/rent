@@ -22,6 +22,11 @@ public class CostumeController {
         return costumeService.getCostumes();
     }
 
+    @GetMapping("/{id}")
+    private CostumesDTO getCostume(@PathVariable int id) {
+        return costumeService.getById(id);
+    }
+
     @PostMapping
     private ResponseEntity createCostume(@RequestBody CostumeRequest costumeRequest) {
         try {

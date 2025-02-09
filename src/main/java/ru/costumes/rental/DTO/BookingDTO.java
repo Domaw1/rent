@@ -1,14 +1,11 @@
 package ru.costumes.rental.DTO;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import ru.costumes.rental.model.Booking;
-import ru.costumes.rental.model.Costume;
 import ru.costumes.rental.model.User;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

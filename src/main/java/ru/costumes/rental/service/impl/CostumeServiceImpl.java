@@ -35,6 +35,11 @@ public class CostumeServiceImpl implements CostumeService {
     }
 
     @Override
+    public CostumesDTO getById(int id) {
+        return costumeRepository.findById(id).stream().map(CostumesDTO::new).toList().get(0);
+    }
+
+    @Override
     public Costume create(Costume costume, List<Integer> categoryIds, List<String> photos) {
         costume.setCreatedAt(LocalDateTime.now());
         costume.setUpdatedAt(LocalDateTime.now());
