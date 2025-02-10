@@ -1,0 +1,40 @@
+version: "3.1"
+
+services:
+  db:
+    restart: always
+    image: mysql
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: costumes
+    volumes:
+      - my-volume:/var/lib/mysql
+    networks:
+      - custom-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+  api:
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    build: .
+    networks:
+      - custom-network
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/costumes?zeroDateTimeBehavior=convertToNull"
+      JAVA_OPTS: '-Xmx512m'
+
+volumes:
+  my-volume:
+
+networks:
+  custom-network:
